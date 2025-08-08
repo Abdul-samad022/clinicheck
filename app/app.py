@@ -20,8 +20,11 @@ FEATURE_ORDER = ["age", "temperature", "heart_rate"] + SYMPTOMS + ["sex", "comor
 def home():
     return render_template("index.html", symptoms=SYMPTOMS)
 
-@app.route("/predict", methods=["POST"])
+@app.route("/predict", methods=["GET", "POST"])
 def predict():
+    if request.method == "GET":
+        # Optional: render a form or just redirect to home
+        return render_template("predict.html")
     if request.content_type == "application/json":
         data = request.get_json()
     else:
