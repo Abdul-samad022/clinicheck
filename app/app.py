@@ -1,9 +1,13 @@
 from flask import Flask, request, jsonify, render_template
+import os
 import joblib
 import pandas as pd
 
 app = Flask(__name__)
-model = joblib.load("rf_diagnosis_model.joblib")
+#model = joblib.load("rf_diagnosis_model.joblib")
+BASE_DIR = os.path.dirname(__file__)  # directory of app.py
+model_path = os.path.join(BASE_DIR, 'rf_diagnosis_model.joblib')
+model = joblib.load(model_path)
 
 SYMPTOMS = [
     "symptom_fever", "symptom_cough", "symptom_fatigue", "symptom_headache",
