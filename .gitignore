@@ -1,0 +1,4 @@
+venv/
+generate_data.py
+synthetic_health.csv
+train_model.py

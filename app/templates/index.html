@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %} Health Diagnosis Demo {% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Symptom Checker (Synthetic Data)</h1>
+    <div class="card shadow p-4">
+        <form action="/predict" method="post" class="row g-3">
+            <div class="col-md-4">
+                <label class="form-label">Age</label>
+                <input type="number" name="age" class="form-control" required>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Temperature (°C)</label>
+                <input type="number" step="0.1" name="temperature" class="form-control" required>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Heart Rate</label>
+                <input type="number" name="heart_rate" class="form-control" required>
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Sex</label>
+                <select name="sex" class="form-select" required>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Diabetes</label>
+                <select name="comorb_diabetes" class="form-select">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Hypertension</label>
+                <select name="comorb_htn" class="form-select">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <h4 class="mt-4">Symptoms</h4>
+            {% for symptom in symptoms %}
+                <div class="col-md-4">
+                    <label class="form-label">{{ symptom.replace("symptom_", "").replace("_", " ").title() }}</label>
+                    <select name="{{ symptom }}" class="form-select">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+            {% endfor %}
+
+            <div class="col-12 text-center mt-4">
+                <button type="submit" class="btn btn-primary btn-lg">Predict Diagnosis</button>
+            </div>
+        </form>
+    </div>
+    <p class="text-center text-muted mt-3">
+        This is a synthetic demo. Not for real medical use.
+    </p>
+</div>
+{% endblock %}
