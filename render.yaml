@@ -3,5 +3,4 @@ services:
     name: clinicheck
     env: python
     plan: free
-    builtCommand: ""
     startCommand: "gunicorn app.app:app"
